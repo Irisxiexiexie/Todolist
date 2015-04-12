@@ -1,0 +1,9 @@
+<h2>Todolist</h2>
+<%= form_for Todolist.new do |f|%> 
+<%= f.text_field :thing%> 
+<%= f.submit%>
+ <%end%>
+ <% @todolist.each do |todolist| %> 
+ <%= todolist.thing%> 
+ <%= button_to "Edit", edit_todolist_path(todolist), :method => :get %><%= button_to "Delete", todolist_path(todolist), method:"delete" %>
+ <%end%>
