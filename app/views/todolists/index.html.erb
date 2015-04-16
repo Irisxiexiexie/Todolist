@@ -3,7 +3,29 @@
 <%= f.text_field :thing%> 
 <%= f.submit%>
  <%end%>
- <% @todolist.each do |todolist| %> 
+
+ <%= form_tag todolists_path, :method => :get do %>
+  <%= hidden_field_tag :done,""%> 
+  <%= submit_tag "All" %> 
+  <%end%>
+
+  <%= form_tag todolists_path, :method => :get do %>
+   <%= hidden_field_tag :done,"T"%> 
+   <%= submit_tag "Done" %> 
+   <%end%>
+
+   <%= form_tag todolists_path, :method => :get do %>
+    <%= hidden_field_tag :done,"F"%> 
+    <%= submit_tag "Undo" %> 
+    <%end%>
+
+<% @todolist.each do |todolist| %> 
  <%= todolist.thing%> 
- <%= button_to "Edit", edit_todolist_path(todolist), :method => :get %><%= button_to "Delete", todolist_path(todolist), method:"delete" %>
+ <%= button_to "Edit", edit_todolist_path(todolist), :method => :get %>
+ <%= button_to "Delete", todolist_path(todolist), method:"delete" %>
+ <%if todolist.status != "T"%> 
+ <%= button_to "Done", change_todolist_path(todolist), :method => :post%> 
+ <%else%> 
+ <%= button_to "Undo", change_todolist_path(todolist), :method => :post%>
+  <%end%>
  <%end%>
