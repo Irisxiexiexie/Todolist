@@ -10,6 +10,7 @@ group :development, :test do
 end
 gem  'devise'
 
+gem 'devise'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
